@@ -81,10 +81,10 @@ screenGui.ResetOnSpawn = false
 screenGui.DisplayOrder = 999999999
 screenGui.Parent = parentContainer
 
--- Main Frame (Expanded: 360x580)
+-- Main Frame (Dynamic Resizable Base Container)
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 360, 0, 580)
+mainFrame.Size = UDim2.new(0, 360, 0, 580) -- Change this Size anytime; all children scale automatically!
 mainFrame.Position = UDim2.new(0.5, -180, 0.5, -290)
 mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
 mainFrame.BorderSizePixel = 0
@@ -92,109 +92,119 @@ mainFrame.Active = true
 mainFrame.Parent = screenGui
 
 local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 10)
+corner.CornerRadius = UDim.new(0.02, 0)
 corner.Parent = mainFrame
+
+-- Dynamic UI Scale Component to handle proportional font & size scaling
+local uiScale = Instance.new("UIScale")
+uiScale.Parent = mainFrame
 
 -- Title Bar Container
 local titleFrame = Instance.new("Frame")
 titleFrame.Name = "TitleFrame"
-titleFrame.Size = UDim2.new(1, 0, 0, 45)
+titleFrame.Size = UDim2.new(1, 0, 0.08, 0)
 titleFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
 titleFrame.BorderSizePixel = 0
 titleFrame.Parent = mainFrame
 
 local titleCorner = Instance.new("UICorner")
-titleCorner.CornerRadius = UDim.new(0, 10)
+titleCorner.CornerRadius = UDim.new(0.2, 0)
 titleCorner.Parent = titleFrame
 
 -- Title Text
 local titleLabel = Instance.new("TextLabel")
 titleLabel.Name = "Title"
-titleLabel.Size = UDim2.new(1, -50, 1, 0)
-titleLabel.Position = UDim2.new(0, 12, 0, 0)
+titleLabel.Size = UDim2.new(0.8, 0, 1, 0)
+titleLabel.Position = UDim2.new(0.04, 0, 0, 0)
 titleLabel.BackgroundTransparency = 1
 titleLabel.Text = "Idle Mafia V1"
 titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-titleLabel.TextSize = 18
+titleLabel.Scaled = true
+titleLabel.TextScaled = true
 titleLabel.Font = Enum.Font.SourceSansBold
 titleLabel.TextXAlignment = Enum.TextXAlignment.Left
 titleLabel.Parent = titleFrame
 
+local titleConstraint = Instance.new("UITextSizeConstraint")
+titleConstraint.MaxTextSize = 22
+titleConstraint.MinTextSize = 10
+titleConstraint.Parent = titleLabel
+
 -- Top Right Exit / Kill Button
 local exitButton = Instance.new("TextButton")
 exitButton.Name = "ExitButton"
-exitButton.Size = UDim2.new(0, 32, 0, 32)
-exitButton.Position = UDim2.new(1, -38, 0.5, -16)
+exitButton.Size = UDim2.new(0.1, 0, 0.7, 0)
+exitButton.Position = UDim2.new(0.88, 0, 0.15, 0)
 exitButton.BackgroundColor3 = Color3.fromRGB(210, 45, 45)
 exitButton.Text = "X"
 exitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-exitButton.TextSize = 16
+exitButton.TextScaled = true
 exitButton.Font = Enum.Font.SourceSansBold
 exitButton.Parent = titleFrame
 
 local exitCorner = Instance.new("UICorner")
-exitCorner.CornerRadius = UDim.new(0, 6)
+exitCorner.CornerRadius = UDim.new(0.2, 0)
 exitCorner.Parent = exitButton
 
 -- Live Cash Tracker Display
 local liveCashLabel = Instance.new("TextLabel")
 liveCashLabel.Name = "LiveCashTracker"
-liveCashLabel.Size = UDim2.new(0.92, 0, 0, 38)
+liveCashLabel.Size = UDim2.new(0.92, 0, 0.07, 0)
 liveCashLabel.Position = UDim2.new(0.04, 0, 0.10, 0)
 liveCashLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
 liveCashLabel.Text = "Cash on Hand: Reading..."
 liveCashLabel.TextColor3 = Color3.fromRGB(0, 255, 160)
-liveCashLabel.TextSize = 16
+liveCashLabel.TextScaled = true
 liveCashLabel.Font = Enum.Font.SourceSansBold
 liveCashLabel.Parent = mainFrame
 
 local trackerCorner = Instance.new("UICorner")
-trackerCorner.CornerRadius = UDim.new(0, 6)
+trackerCorner.CornerRadius = UDim.new(0.15, 0)
 trackerCorner.Parent = liveCashLabel
 
 -- Keep Amount Box
 local amountBox = Instance.new("TextBox")
 amountBox.Name = "AmountBox"
-amountBox.Size = UDim2.new(0.92, 0, 0, 40)
+amountBox.Size = UDim2.new(0.92, 0, 0.07, 0)
 amountBox.Position = UDim2.new(0.04, 0, 0.18, 0)
 amountBox.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
 amountBox.PlaceholderText = "Keep Amount (e.g. 50000)"
 amountBox.Text = "50000"
 amountBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 amountBox.PlaceholderColor3 = Color3.fromRGB(160, 160, 160)
-amountBox.TextSize = 16
+amountBox.TextScaled = true
 amountBox.Font = Enum.Font.SourceSans
 amountBox.Parent = mainFrame
 
 local boxCorner = Instance.new("UICorner")
-boxCorner.CornerRadius = UDim.new(0, 6)
+boxCorner.CornerRadius = UDim.new(0.15, 0)
 boxCorner.Parent = amountBox
 
 -- Auto Deposit Button
 local depositButton = Instance.new("TextButton")
 depositButton.Name = "DepositButton"
-depositButton.Size = UDim2.new(0.92, 0, 0, 42)
+depositButton.Size = UDim2.new(0.92, 0, 0.07, 0)
 depositButton.Position = UDim2.new(0.04, 0, 0.26, 0)
 depositButton.BackgroundColor3 = Color3.fromRGB(0, 170, 100)
 depositButton.Text = "Start Auto Deposit (Keep Amount)"
 depositButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-depositButton.TextSize = 16
+depositButton.TextScaled = true
 depositButton.Font = Enum.Font.SourceSansBold
 depositButton.Parent = mainFrame
 
 local btnCorner1 = Instance.new("UICorner")
-btnCorner1.CornerRadius = UDim.new(0, 6)
+btnCorner1.CornerRadius = UDim.new(0.15, 0)
 btnCorner1.Parent = depositButton
 
 -- Job Selector Header Label
 local jobSelectTitle = Instance.new("TextLabel")
 jobSelectTitle.Name = "JobSelectTitle"
-jobSelectTitle.Size = UDim2.new(0.92, 0, 0, 22)
+jobSelectTitle.Size = UDim2.new(0.92, 0, 0.04, 0)
 jobSelectTitle.Position = UDim2.new(0.04, 0, 0.35, 0)
 jobSelectTitle.BackgroundTransparency = 1
 jobSelectTitle.Text = "Selected Job: None"
 jobSelectTitle.TextColor3 = Color3.fromRGB(220, 220, 220)
-jobSelectTitle.TextSize = 15
+jobSelectTitle.TextScaled = true
 jobSelectTitle.Font = Enum.Font.SourceSansBold
 jobSelectTitle.TextXAlignment = Enum.TextXAlignment.Left
 jobSelectTitle.Parent = mainFrame
@@ -202,7 +212,7 @@ jobSelectTitle.Parent = mainFrame
 -- Job ScrollList
 local jobScroller = Instance.new("ScrollingFrame")
 jobScroller.Name = "JobScroller"
-jobScroller.Size = UDim2.new(0.92, 0, 0, 130)
+jobScroller.Size = UDim2.new(0.92, 0, 0.22, 0)
 jobScroller.Position = UDim2.new(0.04, 0, 0.40, 0)
 jobScroller.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
 jobScroller.BorderSizePixel = 0
@@ -211,7 +221,7 @@ jobScroller.CanvasSize = UDim2.new(0, 0, 0, 0)
 jobScroller.Parent = mainFrame
 
 local scrollerCorner = Instance.new("UICorner")
-scrollerCorner.CornerRadius = UDim.new(0, 6)
+scrollerCorner.CornerRadius = UDim.new(0.05, 0)
 scrollerCorner.Parent = jobScroller
 
 local listLayout = Instance.new("UIListLayout")
@@ -222,23 +232,23 @@ listLayout.Padding = UDim.new(0, 5)
 -- Auto Job Toggle Button
 local jobButton = Instance.new("TextButton")
 jobButton.Name = "JobButton"
-jobButton.Size = UDim2.new(0.92, 0, 0, 42)
+jobButton.Size = UDim2.new(0.92, 0, 0.07, 0)
 jobButton.Position = UDim2.new(0.04, 0, 0.64, 0)
 jobButton.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
 jobButton.Text = "Start Auto Job"
 jobButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-jobButton.TextSize = 16
+jobButton.TextScaled = true
 jobButton.Font = Enum.Font.SourceSansBold
 jobButton.Parent = mainFrame
 
 local jobBtnCorner = Instance.new("UICorner")
-jobBtnCorner.CornerRadius = UDim.new(0, 6)
+jobBtnCorner.CornerRadius = UDim.new(0.15, 0)
 jobBtnCorner.Parent = jobButton
 
 -- Debug Console Box
 local debugBox = Instance.new("ScrollingFrame")
 debugBox.Name = "DebugBox"
-debugBox.Size = UDim2.new(0.92, 0, 0, 130)
+debugBox.Size = UDim2.new(0.92, 0, 0.22, 0)
 debugBox.Position = UDim2.new(0.04, 0, 0.73, 0)
 debugBox.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
 debugBox.BorderSizePixel = 0
@@ -247,7 +257,7 @@ debugBox.CanvasSize = UDim2.new(0, 0, 0, 0)
 debugBox.Parent = mainFrame
 
 local debugCorner = Instance.new("UICorner")
-debugCorner.CornerRadius = UDim.new(0, 6)
+debugCorner.CornerRadius = UDim.new(0.05, 0)
 debugCorner.Parent = debugBox
 
 local debugLayout = Instance.new("UIListLayout")
