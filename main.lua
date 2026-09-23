@@ -76,49 +76,75 @@ end
 
 -- ScreenGui Setup
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "Idel Mafia V1"
+screenGui.Name = "MafiaWarsHub"
 screenGui.ResetOnSpawn = false
 screenGui.DisplayOrder = 999999999
 screenGui.Parent = parentContainer
 
--- Main Frame (Bigger UI size: 300x480)
+-- Main Frame (Expanded: 360x580)
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 300, 0, 480)
-mainFrame.Position = UDim2.new(0.5, -150, 0.35, -240)
-mainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+mainFrame.Size = UDim2.new(0, 360, 0, 580)
+mainFrame.Position = UDim2.new(0.5, -180, 0.5, -290)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
 mainFrame.Parent = screenGui
 
 local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 8)
+corner.CornerRadius = UDim.new(0, 10)
 corner.Parent = mainFrame
 
--- Title
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Name = "Title"
-titleLabel.Size = UDim2.new(1, 0, 0, 38)
-titleLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-titleLabel.Text = "Idel Mafia V1"
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-titleLabel.TextSize = 16
-titleLabel.Font = Enum.Font.SourceSansBold
-titleLabel.Parent = mainFrame
+-- Title Bar Container
+local titleFrame = Instance.new("Frame")
+titleFrame.Name = "TitleFrame"
+titleFrame.Size = UDim2.new(1, 0, 0, 45)
+titleFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
+titleFrame.BorderSizePixel = 0
+titleFrame.Parent = mainFrame
 
 local titleCorner = Instance.new("UICorner")
-titleCorner.CornerRadius = UDim.new(0, 8)
-titleCorner.Parent = titleLabel
+titleCorner.CornerRadius = UDim.new(0, 10)
+titleCorner.Parent = titleFrame
+
+-- Title Text
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "Title"
+titleLabel.Size = UDim2.new(1, -50, 1, 0)
+titleLabel.Position = UDim2.new(0, 12, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Idle Mafia V1"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 18
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.Parent = titleFrame
+
+-- Top Right Exit / Kill Button
+local exitButton = Instance.new("TextButton")
+exitButton.Name = "ExitButton"
+exitButton.Size = UDim2.new(0, 32, 0, 32)
+exitButton.Position = UDim2.new(1, -38, 0.5, -16)
+exitButton.BackgroundColor3 = Color3.fromRGB(210, 45, 45)
+exitButton.Text = "X"
+exitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+exitButton.TextSize = 16
+exitButton.Font = Enum.Font.SourceSansBold
+exitButton.Parent = titleFrame
+
+local exitCorner = Instance.new("UICorner")
+exitCorner.CornerRadius = UDim.new(0, 6)
+exitCorner.Parent = exitButton
 
 -- Live Cash Tracker Display
 local liveCashLabel = Instance.new("TextLabel")
 liveCashLabel.Name = "LiveCashTracker"
-liveCashLabel.Size = UDim2.new(0.9, 0, 0, 32)
-liveCashLabel.Position = UDim2.new(0.05, 0, 0.10, 0)
-liveCashLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+liveCashLabel.Size = UDim2.new(0.92, 0, 0, 38)
+liveCashLabel.Position = UDim2.new(0.04, 0, 0.10, 0)
+liveCashLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
 liveCashLabel.Text = "Cash on Hand: Reading..."
-liveCashLabel.TextColor3 = Color3.fromRGB(0, 255, 150)
-liveCashLabel.TextSize = 15
+liveCashLabel.TextColor3 = Color3.fromRGB(0, 255, 160)
+liveCashLabel.TextSize = 16
 liveCashLabel.Font = Enum.Font.SourceSansBold
 liveCashLabel.Parent = mainFrame
 
@@ -129,14 +155,14 @@ trackerCorner.Parent = liveCashLabel
 -- Keep Amount Box
 local amountBox = Instance.new("TextBox")
 amountBox.Name = "AmountBox"
-amountBox.Size = UDim2.new(0.9, 0, 0, 35)
-amountBox.Position = UDim2.new(0.05, 0, 0.18, 0)
-amountBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+amountBox.Size = UDim2.new(0.92, 0, 0, 40)
+amountBox.Position = UDim2.new(0.04, 0, 0.18, 0)
+amountBox.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
 amountBox.PlaceholderText = "Keep Amount (e.g. 50000)"
 amountBox.Text = "50000"
 amountBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 amountBox.PlaceholderColor3 = Color3.fromRGB(160, 160, 160)
-amountBox.TextSize = 14
+amountBox.TextSize = 16
 amountBox.Font = Enum.Font.SourceSans
 amountBox.Parent = mainFrame
 
@@ -147,12 +173,12 @@ boxCorner.Parent = amountBox
 -- Auto Deposit Button
 local depositButton = Instance.new("TextButton")
 depositButton.Name = "DepositButton"
-depositButton.Size = UDim2.new(0.9, 0, 0, 35)
-depositButton.Position = UDim2.new(0.05, 0, 0.27, 0)
+depositButton.Size = UDim2.new(0.92, 0, 0, 42)
+depositButton.Position = UDim2.new(0.04, 0, 0.26, 0)
 depositButton.BackgroundColor3 = Color3.fromRGB(0, 170, 100)
 depositButton.Text = "Start Auto Deposit (Keep Amount)"
 depositButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-depositButton.TextSize = 14
+depositButton.TextSize = 16
 depositButton.Font = Enum.Font.SourceSansBold
 depositButton.Parent = mainFrame
 
@@ -163,12 +189,12 @@ btnCorner1.Parent = depositButton
 -- Job Selector Header Label
 local jobSelectTitle = Instance.new("TextLabel")
 jobSelectTitle.Name = "JobSelectTitle"
-jobSelectTitle.Size = UDim2.new(0.9, 0, 0, 20)
-jobSelectTitle.Position = UDim2.new(0.05, 0, 0.36, 0)
+jobSelectTitle.Size = UDim2.new(0.92, 0, 0, 22)
+jobSelectTitle.Position = UDim2.new(0.04, 0, 0.35, 0)
 jobSelectTitle.BackgroundTransparency = 1
 jobSelectTitle.Text = "Selected Job: None"
 jobSelectTitle.TextColor3 = Color3.fromRGB(220, 220, 220)
-jobSelectTitle.TextSize = 13
+jobSelectTitle.TextSize = 15
 jobSelectTitle.Font = Enum.Font.SourceSansBold
 jobSelectTitle.TextXAlignment = Enum.TextXAlignment.Left
 jobSelectTitle.Parent = mainFrame
@@ -176,11 +202,11 @@ jobSelectTitle.Parent = mainFrame
 -- Job ScrollList
 local jobScroller = Instance.new("ScrollingFrame")
 jobScroller.Name = "JobScroller"
-jobScroller.Size = UDim2.new(0.9, 0, 0, 100)
-jobScroller.Position = UDim2.new(0.05, 0, 0.41, 0)
-jobScroller.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+jobScroller.Size = UDim2.new(0.92, 0, 0, 130)
+jobScroller.Position = UDim2.new(0.04, 0, 0.40, 0)
+jobScroller.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
 jobScroller.BorderSizePixel = 0
-jobScroller.ScrollBarThickness = 5
+jobScroller.ScrollBarThickness = 6
 jobScroller.CanvasSize = UDim2.new(0, 0, 0, 0)
 jobScroller.Parent = mainFrame
 
@@ -191,17 +217,17 @@ scrollerCorner.Parent = jobScroller
 local listLayout = Instance.new("UIListLayout")
 listLayout.Parent = jobScroller
 listLayout.SortOrder = Enum.SortOrder.LayoutOrder
-listLayout.Padding = UDim.new(0, 4)
+listLayout.Padding = UDim.new(0, 5)
 
 -- Auto Job Toggle Button
 local jobButton = Instance.new("TextButton")
 jobButton.Name = "JobButton"
-jobButton.Size = UDim2.new(0.9, 0, 0, 35)
-jobButton.Position = UDim2.new(0.05, 0, 0.64, 0)
+jobButton.Size = UDim2.new(0.92, 0, 0, 42)
+jobButton.Position = UDim2.new(0.04, 0, 0.64, 0)
 jobButton.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
 jobButton.Text = "Start Auto Job"
 jobButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-jobButton.TextSize = 14
+jobButton.TextSize = 16
 jobButton.Font = Enum.Font.SourceSansBold
 jobButton.Parent = mainFrame
 
@@ -212,11 +238,11 @@ jobBtnCorner.Parent = jobButton
 -- Debug Console Box
 local debugBox = Instance.new("ScrollingFrame")
 debugBox.Name = "DebugBox"
-debugBox.Size = UDim2.new(0.9, 0, 0, 110)
-debugBox.Position = UDim2.new(0.05, 0, 0.73, 0)
-debugBox.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+debugBox.Size = UDim2.new(0.92, 0, 0, 130)
+debugBox.Position = UDim2.new(0.04, 0, 0.73, 0)
+debugBox.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
 debugBox.BorderSizePixel = 0
-debugBox.ScrollBarThickness = 5
+debugBox.ScrollBarThickness = 6
 debugBox.CanvasSize = UDim2.new(0, 0, 0, 0)
 debugBox.Parent = mainFrame
 
@@ -227,16 +253,17 @@ debugCorner.Parent = debugBox
 local debugLayout = Instance.new("UIListLayout")
 debugLayout.Parent = debugBox
 debugLayout.SortOrder = Enum.SortOrder.LayoutOrder
-debugLayout.Padding = UDim.new(0, 2)
+debugLayout.Padding = UDim.new(0, 3)
 
 -- Function to print debug log
 local function logDebug(msg)
+    if not debugBox or not debugBox.Parent then return end
     local lbl = Instance.new("TextLabel")
-    lbl.Size = UDim2.new(1, -6, 0, 16)
+    lbl.Size = UDim2.new(1, -8, 0, 18)
     lbl.BackgroundTransparency = 1
     lbl.Text = "[" .. os.date("%X") .. "] " .. tostring(msg)
     lbl.TextColor3 = Color3.fromRGB(0, 255, 180)
-    lbl.TextSize = 11
+    lbl.TextSize = 13
     lbl.Font = Enum.Font.Code
     lbl.TextXAlignment = Enum.TextXAlignment.Left
     lbl.Parent = debugBox
@@ -270,10 +297,19 @@ UserInputService.InputChanged:Connect(function(input)
 end)
 
 -- State Variables
+local isRunning = true
 local isAutoDeposit = false
 local isAutoJob = false
 local selectedJobName = nil
 local selectedJobCardName = nil
+
+-- Kill / Exit Script Logic
+exitButton.MouseButton1Click:Connect(function()
+    isRunning = false
+    isAutoDeposit = false
+    isAutoJob = false
+    screenGui:Destroy()
+end)
 
 -- Toggles
 depositButton.MouseButton1Click:Connect(function()
@@ -319,11 +355,11 @@ local function refreshJobScrollList()
                     knownJobs[jobTitle] = cardName
                     
                     local btn = Instance.new("TextButton")
-                    btn.Size = UDim2.new(1, -6, 0, 24)
-                    btn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+                    btn.Size = UDim2.new(1, -8, 0, 28)
+                    btn.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
                     btn.Text = jobTitle
-                    btn.TextColor3 = Color3.fromRGB(230, 230, 230)
-                    btn.TextSize = 13
+                    btn.TextColor3 = Color3.fromRGB(240, 240, 240)
+                    btn.TextSize = 14
                     btn.Font = Enum.Font.SourceSans
                     btn.Parent = jobScroller
                     
@@ -338,7 +374,7 @@ local function refreshJobScrollList()
                         logDebug("Selected: " .. jobTitle)
                         
                         for _, childBtn in ipairs(jobScroller:GetChildren()) do
-                            if childBtn:IsA("TextButton") then childBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45) end
+                            if childBtn:IsA("TextButton") then childBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 50) end
                         end
                         btn.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
                     end)
@@ -346,12 +382,15 @@ local function refreshJobScrollList()
             end
         end
     end
-    jobScroller.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y + 5)
+    jobScroller.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y + 8)
 end
 
 -- Main Loop (Executes Auto Job & Keep-Deposit every 1 second)
 task.spawn(function()
-    while task.wait(1) do
+    while isRunning do
+        task.wait(1)
+        if not isRunning then break end
+        
         -- 1. Live Cash Display Update
         local currentCash = getLiveCashValue()
         if currentCash then
